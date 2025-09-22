@@ -23,7 +23,6 @@ Exported visuals make the dashboards accessible without requiring Tableau Deskto
 - Built dashboards to visualize growth and returns:  
   - **Growth of $1 (S&P 500)** – long-term compounding growth  
   - **Monthly Returns** – volatility and cyclical patterns  
-  - **Portfolio Performance (additional views)**  
 
 ## Key Insights
 - S&P 500 shows strong long-term compounding growth (“Growth of $1” chart).  
