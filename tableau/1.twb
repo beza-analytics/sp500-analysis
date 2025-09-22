@@ -1,0 +1,929 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20252.25.0514.2217                               -->
+<workbook original-version='18.1' source-build='2025.2.0 (20252.25.0514.2217)' source-platform='win' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <_.fcp.ObjectModelSharedDimensions.true...ObjectModelSharedDimensions />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location id='monthlyreturns' path='/workbooks' revision='1.0' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='month_end_close_sp500' inline='true' name='federated.02jsy7s15hpqvh1g8g0xp10jrpqs' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='month_end_close_sp500' name='textscan.1agouye1jyvtq21h687if1fe6co4'>
+            <connection class='textscan' directory='C:/Users/bbeza/projects/stock/exports' filename='month_end_close_sp500.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1agouye1jyvtq21h687if1fe6co4' name='month_end_close_sp500.csv' table='[month_end_close_sp500#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='month' ordinal='0' />
+            <column datatype='date' name='month_end_date' ordinal='1' />
+            <column datatype='real' name='month_end_close' ordinal='2' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>month</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[month]</local-name>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias>month</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[month_end_close_sp500.csv_CFB1D33C0D7F47EA9C9B476B9F87DE6C]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>month_end_date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[month_end_date]</local-name>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias>month_end_date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[month_end_close_sp500.csv_CFB1D33C0D7F47EA9C9B476B9F87DE6C]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>month_end_close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[month_end_close]</local-name>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias>month_end_close</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[month_end_close_sp500.csv_CFB1D33C0D7F47EA9C9B476B9F87DE6C]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Prev Month Close' datatype='real' name='[Calculation_436286267439591428]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='LOOKUP(SUM([month_end_close]), -1)'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Monthly Return' datatype='real' name='[Calculation_436286267439710213]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='(SUM([month_end_close]) - [Calculation_436286267439591428]) / [Calculation_436286267439591428]'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Is Positive' datatype='boolean' name='[Calculation_436286267446972423]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='[Calculation_436286267439710213] &gt;= 0'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='is negative' datatype='boolean' name='[Calculation_436286267448533000]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='[Calculation_436286267439710213] &lt; 0'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='month_end_close_sp500.csv' datatype='table' name='[__tableau_internal_object_id__].[month_end_close_sp500.csv_CFB1D33C0D7F47EA9C9B476B9F87DE6C]' role='measure' type='quantitative' />
+      <column caption='Month' datatype='string' name='[month]' role='dimension' type='nominal' />
+      <column caption='Month End Close' datatype='real' name='[month_end_close]' role='dimension' type='quantitative' />
+      <column caption='Month End Date' datatype='date' name='[month_end_date]' role='dimension' type='ordinal' />
+      <column-instance column='[Calculation_436286267448533000]' derivation='User' name='[usr:Calculation_436286267448533000:nk:1]' pivot='key' type='nominal'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[Calculation_436286267439710213]' ordering-type='Rows' />
+        <table-calc field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[Calculation_436286267439591428]' ordering-type='Rows' />
+      </column-instance>
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/bbeza/AppData/Local/Temp/TableauTemp/#TableauTemp_0ynp8zl1dm9vwe13n5cqr0tyvtml.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='09/15/2025 02:09:55 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>month</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[month]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>month</remote-alias>
+              <ordinal>0</ordinal>
+              <family>month_end_close_sp500.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1174</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>month_end_date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[month_end_date]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>month_end_date</remote-alias>
+              <ordinal>1</ordinal>
+              <family>month_end_close_sp500.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>1174</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>month_end_close</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[month_end_close]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>month_end_close</remote-alias>
+              <ordinal>2</ordinal>
+              <family>month_end_close_sp500.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1076</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[usr:Calculation_436286267448533000:nk:1]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>%null%</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>false</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>true</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='month_end_close_sp500.csv' id='month_end_close_sp500.csv_CFB1D33C0D7F47EA9C9B476B9F87DE6C'>
+            <properties context=''>
+              <relation connection='textscan.1agouye1jyvtq21h687if1fe6co4' name='month_end_close_sp500.csv' table='[month_end_close_sp500#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='month' ordinal='0' />
+                  <column datatype='date' name='month_end_date' ordinal='1' />
+                  <column datatype='real' name='month_end_close' ordinal='2' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+        </objects>
+      </object-graph>
+    </datasource>
+    <datasource caption='daily_close_sp500' inline='true' name='federated.1pbcoo71wkl9s11fc5ygu0m6zdt4' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='daily_close_sp500' name='textscan.0jhly4e0azfa071h77j4n0k1xbs7'>
+            <connection class='textscan' directory='C:/Users/bbeza/projects/stock/exports' filename='daily_close_sp500.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <_.fcp.ObjectModelSharedDimensions.true...relation connection='textscan.0jhly4e0azfa071h77j4n0k1xbs7' name='daily_close_sp500.csv' table='[daily_close_sp500#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='date' ordinal='0' />
+              <column datatype='real' name='close' ordinal='1' />
+            </columns>
+          </_.fcp.ObjectModelSharedDimensions.true...relation>
+          <_.fcp.ObjectModelSharedDimensions.true...relation connection='textscan.0jhly4e0azfa071h77j4n0k1xbs7' name='month_end_close_sp500.csv' table='[month_end_close_sp500#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='string' name='month' ordinal='0' />
+              <column datatype='date' name='month_end_date' ordinal='1' />
+              <column datatype='real' name='month_end_close' ordinal='2' />
+            </columns>
+          </_.fcp.ObjectModelSharedDimensions.true...relation>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[daily_close_sp500.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[date]</local-name>
+            <parent-name>[daily_close_sp500.csv]</parent-name>
+            <remote-alias>date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[close]</local-name>
+            <parent-name>[daily_close_sp500.csv]</parent-name>
+            <remote-alias>close</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>month</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[month]</local-name>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias>month</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>month_end_date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[month_end_date]</local-name>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias>month_end_date</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>month_end_close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[month_end_close]</local-name>
+            <parent-name>[month_end_close_sp500.csv]</parent-name>
+            <remote-alias>month_end_close</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='indexed to 1' datatype='real' name='[Calculation_436286267434168323]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([close]) / WINDOW_MIN(SUM([close]))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='daily_close_sp500.csv' datatype='table' name='[__tableau_internal_object_id__].[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]' role='measure' type='quantitative' />
+      <column caption='month_end_close_sp500.csv' datatype='table' name='[__tableau_internal_object_id__].[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]' role='measure' type='quantitative' />
+      <column caption='Close' datatype='real' name='[close]' role='measure' type='quantitative' />
+      <column caption='Date' datatype='date' name='[date]' role='dimension' type='ordinal' />
+      <column caption='Month' datatype='string' name='[month]' role='dimension' type='nominal' />
+      <column caption='Month End Close' datatype='real' name='[month_end_close]' role='dimension' type='quantitative' />
+      <column caption='Month End Date' datatype='date' name='[month_end_date]' role='dimension' type='ordinal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/bbeza/AppData/Local/Temp/TableauTemp/#TableauTemp_0z4dr8r1mi6sdg184zixb15wxr55.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='09/15/2025 01:52:08 AM' username='tableau_internal_user'>
+          <relation type='collection'>
+            <_.fcp.ObjectModelSharedDimensions.true...relation name='daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594' table='[Extract].[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]' type='table' />
+            <_.fcp.ObjectModelSharedDimensions.true...relation name='month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A' table='[Extract].[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]' type='table' />
+          </relation>
+          <metadata-records>
+            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+              <remote-name>date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[date]</local-name>
+              <parent-name>[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]</parent-name>
+              <remote-alias>date</remote-alias>
+              <ordinal>0</ordinal>
+              <family>daily_close_sp500.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>24540</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]</object-id>
+            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+              <remote-name>close</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[close]</local-name>
+              <parent-name>[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]</parent-name>
+              <remote-alias>close</remote-alias>
+              <ordinal>1</ordinal>
+              <family>daily_close_sp500.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10044</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]</object-id>
+            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+              <remote-name>month</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[month]</local-name>
+              <parent-name>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</parent-name>
+              <remote-alias>month</remote-alias>
+              <ordinal>2</ordinal>
+              <family>month_end_close_sp500.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1174</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</object-id>
+            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+              <remote-name>month_end_date</remote-name>
+              <remote-type>133</remote-type>
+              <local-name>[month_end_date]</local-name>
+              <parent-name>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</parent-name>
+              <remote-alias>month_end_date</remote-alias>
+              <ordinal>3</ordinal>
+              <family>month_end_close_sp500.csv</family>
+              <local-type>date</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>1174</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</object-id>
+            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+            <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+              <remote-name>month_end_close</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[month_end_close]</local-name>
+              <parent-name>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</parent-name>
+              <remote-alias>month_end_close</remote-alias>
+              <ordinal>4</ordinal>
+              <family>month_end_close_sp500.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1076</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]</object-id>
+            </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='date' />
+        <field-sort-custom-order field='close' />
+        <field-sort-custom-order field='Geometry (generated)' />
+        <field-sort-custom-order field='Latitude (generated)' />
+        <field-sort-custom-order field='Longitude (generated)' />
+        <field-sort-custom-order field='Calculation_436286267433930754' />
+        <field-sort-custom-order field='Calculation_436286267434168323' />
+        <field-sort-custom-order field=':Measure Names' />
+        <field-sort-custom-order field='Multiple Values' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='daily_close_sp500.csv' id='daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594'>
+            <properties context=''>
+              <relation connection='textscan.0jhly4e0azfa071h77j4n0k1xbs7' name='daily_close_sp500.csv' table='[daily_close_sp500#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='date' ordinal='0' />
+                  <column datatype='real' name='close' ordinal='1' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594' table='[Extract].[daily_close_sp500.csv_F1B757A8D4674CB99F3EADF528436594]' type='table' />
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='month_end_close_sp500.csv' id='month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A'>
+            <properties context=''>
+              <relation connection='textscan.0jhly4e0azfa071h77j4n0k1xbs7' name='month_end_close_sp500.csv' table='[month_end_close_sp500#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='month' ordinal='0' />
+                  <column datatype='date' name='month_end_date' ordinal='1' />
+                  <column datatype='real' name='month_end_close' ordinal='2' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A' table='[Extract].[month_end_close_sp500.csv_D653116CFE3A4E3D8F1DF5B16A5DAB1A]' type='table' />
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontalignment='1' fontcolor='#000000' fontname='Berlin Sans FB' fontsize='18'>Growth of $1 — S&amp;P 500</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='daily_close_sp500' name='federated.1pbcoo71wkl9s11fc5ygu0m6zdt4' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1pbcoo71wkl9s11fc5ygu0m6zdt4'>
+            <column caption='indexed to 1' datatype='real' name='[Calculation_436286267434168323]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([close]) / WINDOW_MIN(SUM([close]))'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Close' datatype='real' name='[close]' role='measure' type='quantitative' />
+            <column caption='Date' datatype='date' name='[date]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_436286267434168323]' derivation='User' name='[usr:Calculation_436286267434168323:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[date]' derivation='Year' name='[yr:date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>[federated.1pbcoo71wkl9s11fc5ygu0m6zdt4].[usr:Calculation_436286267434168323:qk]</rows>
+        <cols>[federated.1pbcoo71wkl9s11fc5ygu0m6zdt4].[yr:date:ok]</cols>
+      </table>
+      <simple-id uuid='{55B60C98-3B98-4A09-8852-5A0F4EF6B4E4}' />
+    </worksheet>
+    <worksheet name='Sheet 2'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontcolor='#000000' fontname='Bodoni MT' fontsize='18'>S&amp;P 500 Monthly Returns</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='month_end_close_sp500' name='federated.02jsy7s15hpqvh1g8g0xp10jrpqs' />
+          </datasources>
+          <datasource-dependencies datasource='federated.02jsy7s15hpqvh1g8g0xp10jrpqs'>
+            <column caption='Prev Month Close' datatype='real' name='[Calculation_436286267439591428]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='LOOKUP(SUM([month_end_close]), -1)'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Monthly Return' datatype='real' name='[Calculation_436286267439710213]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='(SUM([month_end_close]) - [Calculation_436286267439591428]) / [Calculation_436286267439591428]'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='is negative' datatype='boolean' name='[Calculation_436286267448533000]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='[Calculation_436286267439710213] &lt; 0'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Month' datatype='string' name='[month]' role='dimension' type='nominal' />
+            <column caption='Month End Close' datatype='real' name='[month_end_close]' role='dimension' type='quantitative' />
+            <column-instance column='[month]' derivation='None' name='[none:month:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_436286267439710213]' derivation='User' name='[usr:Calculation_436286267439710213:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[Calculation_436286267439591428]' ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_436286267448533000]' derivation='User' name='[usr:Calculation_436286267448533000:nk:1]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[Calculation_436286267439710213]' ordering-type='Rows' />
+              <table-calc field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[Calculation_436286267439591428]' ordering-type='Rows' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[none:month:nk]'>
+            <groupfilter expression='STARTSWITH(LOWER([month]), LOWER(&apos;202&apos;))' function='filter' user:ui-enumeration='inclusive' user:ui-pattern-include-all-when-empty='true' user:ui-pattern_text='202' user:ui-pattern_type='starts-with'>
+              <groupfilter function='level-members' level='[none:month:nk]' user:ui-manual-selection='true' user:ui-manual-selection-all-when-empty='true' user:ui-manual-selection-is-empty='true' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[none:month:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[usr:Calculation_436286267439710213:qk]' field-type='quantitative' max='0.22165978559895166' min='-0.42219800005950386' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[usr:Calculation_436286267439710213:qk]' value='*0.00%' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[usr:Calculation_436286267448533000:nk:1]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-color' value='#59a14f' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[usr:Calculation_436286267439710213:qk]</rows>
+        <cols>[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[none:month:nk]</cols>
+      </table>
+      <simple-id uuid='{C5ACB731-38E7-4A29-AE7B-6D35F8917AF3}' />
+    </worksheet>
+    <worksheet name='Sheet 3'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{60F44D02-6B5C-47F2-8905-FA43FD7254EF}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.5' source-height='75'>
+    <window class='worksheet' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.1pbcoo71wkl9s11fc5ygu0m6zdt4].[yr:date:ok]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{C41C0AFA-8367-4E46-9BB0-09B833544324}' />
+    </window>
+    <window class='worksheet' name='Sheet 3'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{656EAF1A-9A63-47B0-A7D3-BE68D136C524}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[none:month:nk]</field>
+            <field>[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[none:month_end_close:qk]</field>
+            <field>[federated.02jsy7s15hpqvh1g8g0xp10jrpqs].[usr:Calculation_436286267448533000:nk:1]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{A6BE2194-7A54-465D-B728-846ED46AF134}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Sheet 2' width='192'>
+      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
+      3+MnnU5TF2jArXmwTHOzTTJXoNYfozXUjqZp6JoOeQi6Kmmv7sQyLRQKv+7HUmpzOTR0XafC
+      VcnG4uK2eggG0WK1qKHhbfXQ2EhruJ1MfgNLKco9ATKZDHWBRlzKjWEYWKZFNpPFmJ7DWl7Z
+      +vqmRipdVbSG2jF0A8uy8ODFpbtoi3RgWRYaGiFPCK2gbS2nLPx6GbpmbNVt6FS6qqCg0R7p
+      xFKbradRX5x8Ln93OdANg2h5jHQ6zelQGxu59ObrucvIZDJYY2NomexWjadbiPpjtIU7sNRm
+      PYZysT4xgbG4dYmZRByfVraj7vCun6NVEUCrrd32e9XLyzDr6mipbCVnbm4bPpePdDqNcfMm
+      VnpjWz2zmTnShVTxuWRFPb6lFGph4b56Evjw0xZ+Ak3TMS2TCqNyc1tT6mB9Wf29PZzu6GKg
+      r5eus2eZGRvEW93E7PgQpgZPdHbR39tHa0sTE1MzWJaJW9NoOtOGfre/dGe7WnZkhNmXv1Ic
+      l334Q4T+9m8w/Xe/VHzO09JC7F989SClP7Ds0DCzX/mnW/V85CKhy7/O9Jf+3lY9ra3EvvrP
+      Hvg1F37/35N+663iOPZ7X8Nz6tThFHxIbr/8FXIjI8Vx8uv/FaOiYtdyy9/+E1a/893iOPJb
+      f5/yixd3LZcdHmb2n9z3c7x4kdDfusz0F79cfM7TeprYV/956Xr+8cvkbtwojuu+8XX08t13
+      sZf/+NusfvdPt+r5B79F+Yc+tGs5TdO0A+8BTrc00nftGjXxOuZnbxOta6L/ej/loSiJsJ/e
+      q1eJ1TXh9boJRWpQ2TXWZJZIcUwcOABuf5DzO2aJPLttlsitWSGjES9QRe3dsWz/jwejqgp3
+      49ZJt15+cj6ixTF3go8bI1SFK3Hfh8q6T26DTMWlF6i49ILdZeyLBMAmoc9fJvT5y++/oHik
+      5FqkcDQJgHA0CYBwNAmAcDQJgHA0uQq0T7rfT/Xv/qOtcYk7kuL4kwDsk+Z2U/bUU3aXceJp
+      bjeBj3+8OHbV1hzp+iUAwla6z0f4i3/HvvXbtmYhjgHZAzwAPVCO/6kni2NPU5N9xYhDtWcA
+      7r1LWrq5wJ1IUPO7h/8hVcJ+ex4Cra6leOV7f4ZlyXs2xeOr5B5g/OYtvvXH/4tAeRnTM7PU
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Sheet 3' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABYlAAAWJQFJUiTw
+      AAACF0lEQVR4nO3TMQEAIAzAMIZ/z0MGRxMFfTq7uweCZmbu7wj4yQCkGYA0A5BmANIMQJoB
+      SDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0
+      A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMA
+      aQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5Bm
+      ANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYg
+      zQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIM
+      QJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCk
+      GYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoB
+      SDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0
+      A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSDMAaQYgzQCkGYA0A5BmANIMQJoBSHtb
+      egWA0FAUAAAAAABJRU5ErkJggg==
+    </thumbnail>
+  </thumbnails>
+</workbook>
